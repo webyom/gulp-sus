@@ -9,7 +9,7 @@ module.exports = (opt = {}) ->
 	through.obj (file, enc, next) ->
 		return @emit 'error', new gutil.PluginError('gulp-sus', 'File can\'t be null') if file.isNull()
 		return @emit 'error', new gutil.PluginError('gulp-sus', 'Streams not supported') if file.isStream()
-		return @emit 'error', new gutil.PluginError('gulp-sus', 'Streams not supported') if path.extname(file.path).toLowerCase() isnt '.css'
+		return @emit 'error', new gutil.PluginError('gulp-sus', 'File type not supported') if path.extname(file.path).toLowerCase() isnt '.css'
 		sus file.contents.toString(),
 			base: path.dirname(file.path)
 		.parse (err, parsed) =>
