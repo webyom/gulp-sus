@@ -1,6 +1,6 @@
 {
   "name": "gulp-sus",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A gulp plug in for sus.",
   "keywords": [
     "sus",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "gulp-util": "^2.2.19",
-    "sus": "^0.1.6",
+    "sus": "git://github.com/webyom/sus.git",
     "through2": "^0.5.1"
   },
   "devDependencies": {
