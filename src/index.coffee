@@ -20,7 +20,10 @@ cssDeclarations = (filePath, declarations, opt = {}) ->
 						imgPath = path.resolve path.dirname(filePath), imgPath
 						if fs.existsSync imgPath
 							declaration.value = declaration.value.replace URL_REGEXP, ->
-								'url("data:image/' + path.extname(imgPath).replace(/^\./, '') + ';base64,' + fs.readFileSync(imgPath, 'base64') + '")'
+								ext = path.extname(imgPath).replace(/^\./, '').toLowerCase()
+								if ext is 'svg'
+									ext = 'svg+xml'
+								'url("data:image/' + ext + ';base64,' + fs.readFileSync(imgPath, 'base64') + '")'
 							cb()
 						else
 							cb()
