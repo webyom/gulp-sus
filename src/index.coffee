@@ -2,7 +2,7 @@ Q = require 'q'
 fs = require 'fs'
 path = require 'path'
 async = require 'async'
-gutil = require 'gulp-util'
+PluginError = require 'plugin-error'
 through = require 'through2'
 cssParser = require 'css'
 
@@ -67,7 +67,7 @@ cssRules = (filePath, rules, opt = {}) ->
 		)
 
 cssContent = (content, filePath, opt = {}) ->
-	throw new gutil.PluginError('gulp-img-css-sprite', 'filePath is needed') if not filePath
+	throw new PluginError('gulp-img-css-sprite', 'filePath is needed') if not filePath
 	Q.Promise (resolve, reject) ->
 		if URL_REGEXP.test content
 			ast = cssParser.parse content, opt
@@ -83,16 +83,16 @@ cssContent = (content, filePath, opt = {}) ->
 
 module.exports = (opt = {}) ->
 	through.obj (file, enc, next) ->
-		return @emit 'error', new gutil.PluginError('gulp-sus', 'File can\'t be null') if file.isNull()
-		return @emit 'error', new gutil.PluginError('gulp-sus', 'Streams not supported') if file.isStream()
-		return @emit 'error', new gutil.PluginError('gulp-sus', 'File type not supported') if path.extname(file.path).toLowerCase() isnt '.css'
+		return @emit 'error', new PluginError('gulp-sus', 'File can\'t be null') if file.isNull()
+		return @emit 'error', new PluginError('gulp-sus', 'Streams not supported') if file.isStream()
+		return @emit 'error', new PluginError('gulp-sus', 'File type not supported') if path.extname(file.path).toLowerCase() isnt '.css'
 		cssContent(file.contents.toString(), file.path, opt).then(
 			(content) =>
 				file.contents = new Buffer content
 				@push file
 				next()
 			(err) =>
-				@emit 'error', new gutil.PluginError('gulp-sus', err) if err
+				@emit 'error', new PluginError('gulp-sus', err) if err
 		).done()
 
 module.exports.cssContent = cssContent

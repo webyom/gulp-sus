@@ -1,6 +1,6 @@
 {
   "name": "gulp-sus",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "A gulp plug in for sus.",
   "keywords": [
     "sus",
@@ -29,13 +29,12 @@
   "engines": {
     "node": ">= 0.8.0"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
-    "q": "^1.0.1",
-    "css": "^2.2.0",
     "async": "^0.9.0",
-    "gulp-util": "^2.2.19",
+    "css": "^2.2.0",
+    "plugin-error": "^1.0.0",
+    "q": "^1.0.1",
     "through2": "^0.5.1"
   },
   "devDependencies": {
