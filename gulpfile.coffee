@@ -10,8 +10,11 @@ gulp.task 'example', ->
 	sus = require './lib/index'
 	gulp.src('example/src/style.css')
 		.pipe sus
-			basePath: 'example/src',
+			basePath: 'example/src'
 			maxSize: 3000
+			match: (p) ->
+				m = p.match /(.+)\?sus$/
+				m && m[1]
 		.pipe gulp.dest('example/dest')
 
 gulp.task 'default', ['compile']

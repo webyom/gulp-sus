@@ -1,19 +1,19 @@
 .button {
 	height: 30px;
-	background-image: url(./button.png);
+	background-image: url(./button.png?sus);
 }
 
 .menu {
 	height: 30px;
-	background-image: url(./arrow.png?);
+	background-image: url(./arrow.png);
 }
 
 .sub-menu {
 	height: 30px;
-	background-image: url(/arrow.png);
+	background-image: url(/arrow.png?sus);
 }
 
 .sub-sub-menu {
 	height: 30px;
-	background-image: url(./arrow.png);
+	background-image: url(./arrow.png?sus);
 }
