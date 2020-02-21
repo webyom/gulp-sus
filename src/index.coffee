@@ -17,14 +17,21 @@ cssDeclarations = (filePath, declarations, opt = {}) ->
 					m = declaration.value.match URL_REGEXP
 					imgPath = m?[2]
 					if imgPath and not (/^data:|\/\//i).test(imgPath)
-						imgPath = path.resolve path.dirname(filePath), imgPath
+						if imgPath.indexOf('/') is 0 and opt.basePath
+							imgPath = path.join opt.basePath, imgPath
+						else
+							imgPath = path.resolve path.dirname(filePath), imgPath
 						if fs.existsSync imgPath
-							declaration.value = declaration.value.replace URL_REGEXP, ->
-								ext = path.extname(imgPath).replace(/^\./, '').toLowerCase()
-								if ext is 'svg'
-									ext = 'svg+xml'
-								'url("data:image/' + ext + ';base64,' + fs.readFileSync(imgPath, 'base64') + '")'
-							cb()
+							if opt.maxSize and fs.statSync(imgPath).size > opt.maxSize
+								cb()
+							else
+								declaration.value = declaration.value.replace URL_REGEXP, ->
+									ext = path.extname(imgPath).replace(/^\./, '').toLowerCase()
+									if ext is 'svg'
+										ext = 'svg+xml'
+									content = fs.readFileSync imgPath, 'base64'
+									'url("data:image/' + ext + ';base64,' + content + '")'
+								cb()
 						else
 							cb()
 					else

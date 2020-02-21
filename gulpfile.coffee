@@ -10,17 +10,8 @@ gulp.task 'example', ->
 	sus = require './lib/index'
 	gulp.src('example/src/style.css')
 		.pipe sus
-			split: true
-		.pipe gulp.dest('example/dest')
-	gulp.src('example/src/style.css')
-		.pipe sus
-			baseSurfix: false
-		.pipe gulp.dest('example/dest')
-	gulp.src('example/src/style.css')
-		.pipe sus
-			split: true
-			baseSurfix: '_base'
-			spritesSurfix: '_sprites'
+			basePath: 'example/src',
+			maxSize: 3000
 		.pipe gulp.dest('example/dest')
 
 gulp.task 'default', ['compile']
