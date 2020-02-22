@@ -20,7 +20,7 @@ cssDeclarations = (filePath, declarations, opt = {}) ->
 						matchedPath = imgPath = if opt.match then opt.match imgPath else imgPath
 						if imgPath
 							if imgPath.indexOf('/') is 0 and opt.basePath
-								imgPath = path.join opt.basePath, imgPath
+								imgPath = path.join path.resolve(opt.basePath), imgPath
 							else
 								imgPath = path.resolve path.dirname(filePath), imgPath
 							if fs.existsSync imgPath
