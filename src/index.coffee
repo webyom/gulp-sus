@@ -19,8 +19,8 @@ cssDeclarations = (filePath, declarations, opt = {}) ->
 					if imgPath and not (/^data:|\/\//i).test(imgPath)
 						matchedPath = imgPath = if opt.match then opt.match imgPath else imgPath
 						if imgPath
-							if imgPath.indexOf('/') is 0 and opt.basePath
-								imgPath = path.join path.resolve(opt.basePath), imgPath
+							if imgPath.indexOf('/') is 0 and opt.baseDir
+								imgPath = path.join path.resolve(opt.baseDir), imgPath
 							else
 								imgPath = path.resolve path.dirname(filePath), imgPath
 							if fs.existsSync imgPath
